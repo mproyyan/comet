@@ -1,0 +1,18 @@
+{
+    "require": {
+        "psr/container": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mproyyan\\Comet\\": "mproyyan/comet/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5"
+    }
+}
