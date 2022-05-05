@@ -1,18 +1,17 @@
 <?php
 
 use Mproyyan\Comet\Core\Application;
-use Mproyyan\Comet\Routing\Router;
+use Mproyyan\Comet\Suport\Facades\Route;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = new Application;
-$router = $app->make(Router::class);
 
-$router->get('/', function () {
+Route::get('/', function () {
    echo 'home page';
 });
 
-$router->get('/about', function () {
+Route::get('/about', function () {
    echo 'about page';
 });
 
