@@ -119,4 +119,19 @@ class ContainerTest extends TestCase
       $this->expectException(BindingResolutionException::class);
       $this->container->make(Union::class);
    }
+
+   public function test_instance_method()
+   {
+      $container = new Container;
+      $instance = $this->container->instance(Container::class, $container);
+
+      $this->assertSame($instance, $container);
+   }
+
+   public function test_set_instance_method()
+   {
+      $instance = Container::setInstance($this->container);
+
+      $this->assertSame($this->container, $instance);
+   }
 }

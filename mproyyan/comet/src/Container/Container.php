@@ -13,6 +13,11 @@ use ReflectionUnionType;
 
 class Container implements ContainerInterface
 {
+   /**
+    * @var \Mproyyan\Comet\Container\Container
+    */
+   protected static $instance;
+
    protected array $bindings = [];
 
    protected array $instances = [];
@@ -146,5 +151,19 @@ class Container implements ContainerInterface
       );
 
       return $dependencies;
+   }
+
+   public function instance($abstract, $instance)
+   {
+      if (!isset($this->instances[$abstract])) {
+         $this->instances[$abstract] = $instance;
+      }
+
+      return $instance;
+   }
+
+   public static function setInstance(Container $container = null)
+   {
+      return static::$instance = $container;
    }
 }
