@@ -9,8 +9,14 @@ use Mproyyan\Comet\Suport\Facades\Facade;
 
 class Application extends Container
 {
-   public function __construct()
+   protected $basePath;
+
+   public function __construct($basePath = null)
    {
+      if ($basePath) {
+         $this->setBasePath($basePath);
+      }
+
       $this->registerBaseBindings();
       $this->registerBaseServiceProvider();
 
@@ -40,5 +46,29 @@ class Application extends Container
       $provider->register();
 
       return $provider;
+   }
+
+   protected function setBasePath($basePath)
+   {
+      $this->basePath = rtrim($basePath, '\/');
+
+      return $this;
+   }
+
+   public function configPath($path = '')
+   {
+      return $this->basePath . DIRECTORY_SEPARATOR . 'config' . ($path != '' ? DIRECTORY_SEPARATOR . $path : '');
+   }
+
+   public function basePath($path = '')
+   {
+      return $this->basePath . ($path != '' ? DIRECTORY_SEPARATOR . $path : '');
+   }
+
+   public function boostrapWith(array $bootstrappers)
+   {
+      foreach ($bootstrappers as $bootstrapper) {
+         $this->make($bootstrapper)->bootstrap($this);
+      }
    }
 }

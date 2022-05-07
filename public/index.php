@@ -1,11 +1,12 @@
 <?php
 
-use Mproyyan\Comet\Core\Application;
+use Mproyyan\Comet\Core\Http\Kernel;
 use Mproyyan\Comet\Suport\Facades\Route;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$app = new Application;
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+$app->make(Kernel::class)->bootstrap();
 
 Route::get('/', function () {
    echo 'home page';
