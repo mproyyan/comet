@@ -19,8 +19,6 @@ class Application extends Container
 
       $this->registerBaseBindings();
       $this->registerBaseServiceProvider();
-
-      Facade::setFacadeApplication($this);
    }
 
    public function run()

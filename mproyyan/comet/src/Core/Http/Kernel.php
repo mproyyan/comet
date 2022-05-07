@@ -17,7 +17,8 @@ class Kernel
    protected $router;
 
    protected $bootstrappers = [
-      \Mproyyan\Comet\Core\Bootstrap\LoadConfiguration::class
+      \Mproyyan\Comet\Core\Bootstrap\LoadConfiguration::class,
+      \Mproyyan\Comet\Core\Bootstrap\RegisterFacades::class,
    ];
 
    public function __construct(Application $application)

@@ -1,6 +1,7 @@
 <?php
 
 use Mproyyan\Comet\Core\Http\Kernel;
+use Mproyyan\Comet\Suport\Facades\Config;
 use Mproyyan\Comet\Suport\Facades\Route;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -14,6 +15,11 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
    echo 'about page';
+});
+
+Route::get('/config', function () {
+   echo '<pre>';
+   var_dump(Config::get('app.providers'));
 });
 
 $app->run();

@@ -74,4 +74,13 @@ class RepositoryTest extends TestCase
       $this->assertSame('this is alert from another config', $alert);
       $this->assertSame('Muhammad Pandu Royyan', $author);
    }
+
+   public function test_make_sure_repository_is_singleton()
+   {
+      $newRepo = new Repository();
+      $singletonRepo = $this->app->make('config');
+
+      $this->assertNotSame($newRepo, $this->repo);
+      $this->assertSame($singletonRepo, $this->repo);
+   }
 }
