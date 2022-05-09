@@ -7,6 +7,8 @@ use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
 use Mproyyan\Comet\Container\Exceptions\BindingResolutionException;
+use ReflectionFunction;
+use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionParameter;
 use ReflectionUnionType;
@@ -165,5 +167,57 @@ class Container implements ContainerInterface
    public static function setInstance(Container $container = null)
    {
       return static::$instance = $container;
+   }
+
+   public function resolveCallbackDependencies($source, $primitiveParameters = [])
+   {
+      if ($source instanceof \Closure) {
+         return $this->getParametersFromFunction($source, $primitiveParameters);
+      }
+
+      if (is_array($source)) {
+         return $this->getParametersFromMethod($source, $primitiveParameters);
+      }
+   }
+
+   protected function getParametersFromFunction(\Closure $callback, $primitiveParameters = [])
+   {
+      $callback = new ReflectionFunction($callback);
+      $parameters = $callback->getParameters();
+
+      return $this->combineParameters($parameters, $primitiveParameters);
+   }
+
+   protected function getParametersFromMethod(array $callback, $primitiveParameters = [])
+   {
+      $callback = new ReflectionMethod($callback[0], $callback[1]);
+      $parameters = $callback->getParameters();
+
+      return $this->combineParameters($parameters, $primitiveParameters);
+   }
+
+   protected function combineParameters($typeHintedParams, $primitiveParams = [])
+   {
+      $parameters = [];
+
+      foreach ($typeHintedParams as $parameter) {
+         $name = $parameter->getName();
+         $type = $parameter->getType();
+
+         if ($type === null && array_key_exists($name, $primitiveParams)) {
+            $parameters[] = $primitiveParams[$name];
+         }
+
+         if ($type instanceof ReflectionUnionType) {
+            throw new BindingResolutionException("Failed to resolve dependency [$name] because of union type.");
+            break;
+         }
+
+         if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
+            $parameters[] = $this->make($type->getName());
+         }
+      }
+
+      return $parameters;
    }
 }

@@ -4,7 +4,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Mproyyan\\Comet\\": "mproyyan/comet/src/"
+            "Mproyyan\\Comet\\": "mproyyan/comet/src/",
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

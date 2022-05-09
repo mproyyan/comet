@@ -1,7 +1,7 @@
 <?php
 
 use Mproyyan\Comet\Core\Application;
-use Mproyyan\Comet\Core\Http\Kernel;
+use App\Http\Kernel;
 
 $app = new Application(
    dirname(__DIR__)

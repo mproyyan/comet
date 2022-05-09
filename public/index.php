@@ -1,6 +1,7 @@
 <?php
 
-use Mproyyan\Comet\Core\Http\Kernel;
+use App\Http\Controller\TestController;
+use App\Http\Kernel;
 use Mproyyan\Comet\Suport\Facades\Config;
 use Mproyyan\Comet\Suport\Facades\Route;
 
@@ -21,5 +22,13 @@ Route::get('/config', function () {
    echo '<pre>';
    var_dump(Config::get('app.providers'));
 });
+
+Route::get('/profile/{username}', function ($username, Kernel $kernel) {
+   echo $username . PHP_EOL;
+   echo '<pre>';
+   print_r($kernel);
+});
+
+Route::get('/test/{foo}', [TestController::class, 'index']);
 
 $app->run();
