@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29af0bd289c816929ab3072c9f3b583d",
+    "content-hash": "026515cee57056b42f08bbcaa78d96a2",
     "packages": [
+        {
+            "name": "mproyyan/comet-core",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mproyyan/comet-core.git",
+                "reference": "650d3cfa9e6c80898e9cfd14fcf0727d04dea3f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mproyyan/comet-core/zipball/650d3cfa9e6c80898e9cfd14fcf0727d04dea3f1",
+                "reference": "650d3cfa9e6c80898e9cfd14fcf0727d04dea3f1",
+                "shasum": ""
+            },
+            "require": {
+                "psr/container": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Mproyyan\\Comet\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "royyan",
+                    "email": "mproyyan@gmail.com"
+                }
+            ],
+            "description": "Core of comet framework",
+            "support": {
+                "issues": "https://github.com/mproyyan/comet-core/issues",
+                "source": "https://github.com/mproyyan/comet-core/tree/v1.0.0"
+            },
+            "time": "2022-05-11T01:56:15+00:00"
+        },
         {
             "name": "psr/container",
             "version": "2.0.2",
